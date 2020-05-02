@@ -1,0 +1,46 @@
+void setup() {
+
+pinMode(0, INPUT);
+Serial.begin(9600);
+
+}
+
+int temp_array[] = {100,900,300,900,300,900,300,100,900,100,900};
+
+int light;
+
+int counter =0;
+void loop() {
+
+    light = temp_array[counter];
+  
+    if(light > 899 ){
+        Particle.publish("light", "high", PRIVATE);
+        }
+    
+    
+    if(light < 400 ){
+        Particle.publish("light", "low", PRIVATE);
+        }
+    
+
+   if (counter == 10) {counter = -1;};
+      counter = counter + 1;
+      delay(10000);
+    
+    
+    int sensor_output;
+    sensor_output = digitalRead(0);
+
+    if(sensor_output == LOW ){
+      
+    }
+    
+    else{
+        Particle.publish("motion", "motion_found", PRIVATE);
+        delay(10000);
+    }
+    
+    
+    
+}
